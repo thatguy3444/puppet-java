@@ -7,7 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 public class Test_FillQueue {
-    public static boolean run(ExecutorService threadPool, TestableQueue testQueue) {
+    public static boolean run(ExecutorService threadPool, TestableQueue<Object> testQueue) {
         System.out.print("Running test: Fill Queue to Capacity... ");
 
         Future<?> testFuture = null;

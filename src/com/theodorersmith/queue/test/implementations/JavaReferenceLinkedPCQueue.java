@@ -18,7 +18,7 @@ public final class JavaReferenceLinkedPCQueue<T> implements TestableQueue<T> {
     /// Construction and Initialization
     public JavaReferenceLinkedPCQueue(int capacity) {
         this.capacity = capacity;
-        javaBlockingQueue = new LinkedBlockingQueue<T>(this.capacity);
+        javaBlockingQueue = new LinkedBlockingQueue<>(this.capacity);
     }
 
     /// ITestableQueue Implementation (Just used for testing)

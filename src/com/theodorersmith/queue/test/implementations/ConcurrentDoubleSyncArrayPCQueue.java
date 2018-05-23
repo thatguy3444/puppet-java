@@ -29,6 +29,7 @@ public class ConcurrentDoubleSyncArrayPCQueue<T> implements TestableQueue<T> {
     private AtomicInteger length;
 
     /// Construction and Initialization
+    @SuppressWarnings("unchecked")
     public ConcurrentDoubleSyncArrayPCQueue(int capacity) {
         if (capacity < 1) {
             // If the capacity is less than 1, throw an Illegal Argument Exception
@@ -106,7 +107,7 @@ public class ConcurrentDoubleSyncArrayPCQueue<T> implements TestableQueue<T> {
     /// Threadsafe pops an item off the front of the queue. Blocks if queue is full
     public T dequeue() {
         // Sync on the read lock
-        T item = null;
+        T item;
         synchronized (readLockObj) {
             // Check if there are items to pop off the queue
             while (length.get() == 0) {

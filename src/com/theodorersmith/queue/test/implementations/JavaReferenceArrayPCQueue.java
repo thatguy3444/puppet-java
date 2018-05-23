@@ -18,7 +18,7 @@ public final class JavaReferenceArrayPCQueue<T> implements TestableQueue<T> {
     /// Construction and Initialization
     public JavaReferenceArrayPCQueue(int capacity) {
         this.capacity = capacity;
-        javaBlockingQueue = new ArrayBlockingQueue<T>(this.capacity);
+        javaBlockingQueue = new ArrayBlockingQueue<>(this.capacity);
     }
 
     /// ITestableQueue Implementation (Just used for testing)

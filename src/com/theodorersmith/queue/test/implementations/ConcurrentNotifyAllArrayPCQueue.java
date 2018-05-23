@@ -14,6 +14,7 @@ public final class ConcurrentNotifyAllArrayPCQueue<T> implements TestableQueue<T
     private final T[] queueArray; // The internal array backing the queue. (Treated as circular array around headIdx)
 
     /// Construction and Initialization
+    @SuppressWarnings("unchecked")
     public ConcurrentNotifyAllArrayPCQueue(int capacity) {
         if (capacity < 1) {
             // If the capacity is less than 1, throw an Illegal Argument Exception

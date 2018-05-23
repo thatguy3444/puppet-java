@@ -23,6 +23,7 @@ public final class ConcurrentTwoConditionLockArrayPCQueue<T> implements Testable
     private Condition queueNotEmptyCondition = queueLock.newCondition();
 
     /// Construction and Initialization
+    @SuppressWarnings("unchecked")
     public ConcurrentTwoConditionLockArrayPCQueue(int capacity) {
         if (capacity < 1) {
             // If the capacity is less than 1, throw an Illegal Argument Exception

@@ -2,8 +2,6 @@ package com.theodorersmith.queue;
 
 // Copyright Theodore Smith, 2018 - All Rights Reserved
 
-import com.theodorersmith.queue.test.TestableQueue;
-
 import java.util.concurrent.atomic.AtomicInteger;
 
 // This implementation uses two objects for synchronization - a readLockObject (dequeue) and a writeLockObject (enqueue).
@@ -27,6 +25,7 @@ public class ProducerConsumerConcurrentQueue<T> implements ProducerConsumerQueue
     private AtomicInteger length;
 
     /// Construction and Initialization
+    @SuppressWarnings("unchecked")
     public ProducerConsumerConcurrentQueue(int capacity) {
         if (capacity < 1) {
             // If the capacity is less than 1, throw an Illegal Argument Exception
@@ -92,7 +91,7 @@ public class ProducerConsumerConcurrentQueue<T> implements ProducerConsumerQueue
     /// Threadsafe pops an item off the front of the queue. Blocks if queue is full
     public T dequeue() {
         // Sync on the read lock
-        T item = null;
+        T item;
         synchronized (readLockObj) {
             // Check if there are items to pop off the queue
             while (length.get() == 0) {

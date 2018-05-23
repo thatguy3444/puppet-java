@@ -7,7 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 public class Test_QueueBlocking {
-    public static boolean run(ExecutorService threadPool, TestableQueue testQueue) {
+    public static boolean run(ExecutorService threadPool, TestableQueue<Object> testQueue) {
         System.out.print("Running test: Blocking enqueue and dequeue... ");
 
         Future<Object> testFutureDequeueBlock = null;

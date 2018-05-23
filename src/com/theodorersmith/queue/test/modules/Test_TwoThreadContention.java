@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 public class Test_TwoThreadContention {
-    public static boolean run(ExecutorService threadPool, TestableQueue testQueue, boolean isStartQueueFilled) {
+    public static boolean run(ExecutorService threadPool, TestableQueue<Object> testQueue, boolean isStartQueueFilled) {
         System.out.print("Running test: Two Thread Contention with " + (isStartQueueFilled ? "Filled" : "Unfilled") + " Queue... ");
 
         Future<?> testFutureEnqueue = null;
@@ -26,7 +26,7 @@ public class Test_TwoThreadContention {
             }
 
             // Build list of objects to enqueue
-            List<Object> queueObjects = new ArrayList<Object>();
+            List<Object> queueObjects = new ArrayList<>();
             for (int i = 0; i < PCQueueTestHelpers.CONST_DEFAULT_SMALL_CONTENTIONOBJECTCOUNT; i++) {
                 queueObjects.add(new Object());
             }
@@ -46,7 +46,7 @@ public class Test_TwoThreadContention {
             // Start dequeue thread
             testFutureDequeue = threadPool.submit(() ->
             {
-                Set<Object> dequeueResults = new HashSet<Object>();
+                Set<Object> dequeueResults = new HashSet<>();
 
                 for (int i = 0; i < PCQueueTestHelpers.CONST_DEFAULT_SMALL_CONTENTIONOBJECTCOUNT; i++) {
                     if (Thread.currentThread().isInterrupted()) {

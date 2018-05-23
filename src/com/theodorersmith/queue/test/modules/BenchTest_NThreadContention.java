@@ -14,7 +14,7 @@ import java.util.concurrent.*;
 // Uses very simple and inexact stopwatch benchmark, giving a timeout failure if we don't finish before timeout.
 public class BenchTest_NThreadContention {
     public static boolean run(ExecutorService threadPool,
-                              ProducerConsumerQueue testQueue,
+                              ProducerConsumerQueue<Object> testQueue,
                               int numProducerThreads,
                               int maxProducerDelay,
                               int numConsumerThreads,
@@ -40,7 +40,7 @@ public class BenchTest_NThreadContention {
             // Create our callable lists
             // Note: Making the producer callable return an object set is a little hacky, but I want to use invokeAll, which
             // is blocking with a timeout, which means all the Callable objects have to have the same generic type.
-            List<Callable<Set<Object>>> taskList = new ArrayList<Callable<Set<Object>>>();
+            List<Callable<Set<Object>>> taskList = new ArrayList<>();
 
             // Add our producers to the list
             for (int i = 0; i < numProducerThreads; i++) {
@@ -70,7 +70,7 @@ public class BenchTest_NThreadContention {
                 remConsumerObjects -= remConsumerObjects > 0 ? 1 : 0;
                 taskList.add(() -> {
                     // Dequeue and add to result list for a number of objects calculated above
-                    Set<Object> resultSet = new HashSet<Object>();
+                    Set<Object> resultSet = new HashSet<>();
                     for (int j = 0; j < tempNumObjects; j++) {
                         if (Thread.currentThread().isInterrupted()) {
                             // Our queue doesn't throw InterruptedException, so we need to handle interruption.
@@ -102,7 +102,7 @@ public class BenchTest_NThreadContention {
             }
 
             // Combine our results and verify that we dequeued as many objects as we were expecting.
-            Set<Object> combinedResults = new HashSet<Object>();
+            Set<Object> combinedResults = new HashSet<>();
             for (Future<Set<Object>> fut : testFutureResults) {
                 Set<Object> tempResult = fut.get();
                 if (tempResult != null) {

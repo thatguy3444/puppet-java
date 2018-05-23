@@ -21,7 +21,7 @@ public class ProducerConsumerTestInterface {
         }
     }
 
-    public static void printInstructions() {
+    private static void printInstructions() {
         System.out.println("");
         System.out.println("--------------------------------------------------------");
         System.out.println("--- Puppet Java Exercise -------------------------------");
@@ -44,7 +44,7 @@ public class ProducerConsumerTestInterface {
         System.out.println("");
     }
 
-    public static boolean processInput(char c) {
+    private static boolean processInput(char c) {
         switch (c) {
             case 'a':
             case 'A':

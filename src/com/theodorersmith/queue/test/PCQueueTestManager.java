@@ -22,7 +22,7 @@ public class PCQueueTestManager {
 
     // Runs suite of tests on all queue implementations
     public static void testAllQueues() {
-        TestableQueue<Object> notifyAllArrayQueue = new ConcurrentNotifyAllArrayPCQueue<Object>(10);
+        TestableQueue<Object> notifyAllArrayQueue = new ConcurrentNotifyAllArrayPCQueue<>(10);
         TestableQueue<Object> twoConditionArrayQueue = new ConcurrentTwoConditionLockArrayPCQueue<>(10);
         TestableQueue<Object> doubleSyncArrayQueue = new ConcurrentDoubleSyncArrayPCQueue<>(10);
         TestableQueue<Object> javaReferenceArrayQueue = new JavaReferenceArrayPCQueue<>(10);
@@ -75,7 +75,7 @@ public class PCQueueTestManager {
     }
 
 
-    public static void runBenchmarks(int capacity, int producers, int consumers, int numObjects) {
+    private static void runBenchmarks(int capacity, int producers, int consumers, int numObjects) {
         TestableQueue<Object> notifyAllArrayQueue = new ConcurrentNotifyAllArrayPCQueue<>(capacity);
         TestableQueue<Object> twoConditionArrayQueue = new ConcurrentTwoConditionLockArrayPCQueue<>(capacity);
         TestableQueue<Object> doubleSyncArrayQueue = new ConcurrentDoubleSyncArrayPCQueue<>(capacity);
@@ -106,7 +106,7 @@ public class PCQueueTestManager {
     /////
 
     // Runs all the tests (Requires that the queue implement ITestableQueue)
-    public static void runAllTestsOnQueue(TestableQueue testQueue) {
+    private static void runAllTestsOnQueue(TestableQueue<Object> testQueue) {
         String queueClassName = testQueue.getClass().getSimpleName();
         PCQueueTestHelpers.printTestHeader(queueClassName, "Running All Tests with Capacity " + testQueue.getCapacity());
 
@@ -120,7 +120,7 @@ public class PCQueueTestManager {
     }
 
     /// This runs a set of basic functionality tests (Requires that the queue implement ITestableQueue)
-    public static boolean runBasicFunctionalTestsOnQueue(TestableQueue testQueue) {
+    private static boolean runBasicFunctionalTestsOnQueue(TestableQueue<Object> testQueue) {
         boolean success = true;
         ExecutorService threadPool = null;
 
@@ -156,7 +156,7 @@ public class PCQueueTestManager {
     }
 
     /// This runs a set of high concurrency multithreading tests with rough benchmarks
-    public static  boolean runHighConcurrencyTestsOnQueue(ProducerConsumerQueue testQueue) {
+    private static  boolean runHighConcurrencyTestsOnQueue(ProducerConsumerQueue<Object> testQueue) {
         boolean success = true;
         ExecutorService threadPool = null;
 

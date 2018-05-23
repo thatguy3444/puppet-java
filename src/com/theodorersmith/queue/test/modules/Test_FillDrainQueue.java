@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 public class Test_FillDrainQueue {
-    public static boolean run(ExecutorService threadPool, TestableQueue testQueue) {
+    public static boolean run(ExecutorService threadPool, TestableQueue<Object> testQueue) {
         System.out.print("Running test: Filling then emptying queue... ");
 
         Future<List<Object>> testFuture = null;
@@ -29,7 +29,7 @@ public class Test_FillDrainQueue {
 
             // If we are here, we know the future is complete, so we can check if we have a full set of objects (no duplicates) returned from the queue
             List<Object> queueContentList = testFuture.get();
-            HashSet<Object> queueContentSet = new HashSet<Object>(queueContentList);
+            HashSet<Object> queueContentSet = new HashSet<>(queueContentList);
 
             // Check if we dequeued everything we were expecting
             if (queueContentSet.size() != testQueue.getCapacity() || testQueue.getLength() != 0) {
