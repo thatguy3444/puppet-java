@@ -1,6 +1,10 @@
 package com.theodorersmith.queue;
 
+import com.sun.xml.internal.messaging.saaj.util.CharReader;
 import com.theodorersmith.queue.test.PCQueueTestManager;
+
+import java.io.Reader;
+import java.util.Scanner;
 
 public class ProducerConsumerTestInterface {
 
@@ -12,7 +16,8 @@ public class ProducerConsumerTestInterface {
     public static void run() {
         try {
             printInstructions();
-            while (processInput((char) System.in.read())) {
+            Scanner reader = new Scanner(System.in);
+            while (processInput(reader.next().trim().charAt(0))) {
             }
         } catch (Exception ex) {
             System.out.println("Exception Encountered: " + ex.getMessage());
