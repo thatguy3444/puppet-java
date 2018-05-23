@@ -40,7 +40,7 @@ public class PCQueueTestHelpers {
 
     // Dequeues all objects currently in the queue and returns as a list. Respects thread interrupt
     public static List<Object> dequeueAll(TestableQueue testQueue) {
-        List<Object> dequeueList = new ArrayList<Object>();
+        List<Object> dequeueList = new ArrayList<>();
         while (testQueue.getLength() > 0) {
             if (Thread.currentThread().isInterrupted()) {
                 // Our dequeue method doesn't throw InterruptedException, so we need to handle interruption.
@@ -54,7 +54,7 @@ public class PCQueueTestHelpers {
     }
 
     // Enqueues objects until the queue is at max capacity. Respects thread interrupt
-    public static void enqueueToCapacity(TestableQueue testQueue) {
+    public static void enqueueToCapacity(TestableQueue<Object> testQueue) {
         while (testQueue.getLength() < testQueue.getCapacity()) {
             if (Thread.currentThread().isInterrupted()) {
                 // Our enqueue method doesn't throw InterruptedException, so we need to handle interruption.
