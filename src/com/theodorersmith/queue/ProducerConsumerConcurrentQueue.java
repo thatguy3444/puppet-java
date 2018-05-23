@@ -12,7 +12,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 // using the atomic library.
 public class ProducerConsumerConcurrentQueue<T> implements ProducerConsumerQueue<T> {
 
-    /// Member Variables
+    /////
+    ///// Member Variables
+    /////
+
     private final T[] queueArray; // The internal array backing the queue. (Treated as circular array around headIdx)
 
     // We are going to synchronize with two objects - one for reading from the queue and one for writing.
@@ -24,7 +27,10 @@ public class ProducerConsumerConcurrentQueue<T> implements ProducerConsumerQueue
     // The length can be written from within both the enqueue and dequeue sync blocks, so must be threadsafe.
     private AtomicInteger length;
 
-    /// Construction and Initialization
+    /////
+    ///// Construction and Initialization
+    /////
+
     @SuppressWarnings("unchecked")
     public ProducerConsumerConcurrentQueue(int capacity) {
         if (capacity < 1) {
@@ -39,14 +45,18 @@ public class ProducerConsumerConcurrentQueue<T> implements ProducerConsumerQueue
         this.length = new AtomicInteger(0);
     }
 
+    /////
+    ///// Public Methods
+    /////
+
     // Gets the maximum capacity of the queue
     public synchronized int getCapacity() {
         return this.queueArray.length;
     }
 
-    // IProducerConsumerQueue Implementation
     @Override
-    /// Threadsafe add an item to the end of the queue. Blocks if queue is full.
+    // ProducerConsumerQueue Implementation
+    // Threadsafe add an item to the end of the queue. Blocks if queue is full.
     public void enqueue(T item) {
         // Sync on the write lock
         synchronized (writeLockObj) {
@@ -88,7 +98,8 @@ public class ProducerConsumerConcurrentQueue<T> implements ProducerConsumerQueue
     }
 
     @Override
-    /// Threadsafe pops an item off the front of the queue. Blocks if queue is full
+    // ProducerConsumerQueue Implementation
+    // Threadsafe pops an item off the front of the queue. Blocks if queue is full
     public T dequeue() {
         // Sync on the read lock
         T item;

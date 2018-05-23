@@ -1,11 +1,11 @@
 package com.theodorersmith.queue;
 
-import com.sun.xml.internal.messaging.saaj.util.CharReader;
 import com.theodorersmith.queue.test.PCQueueTestManager;
 
-import java.io.Reader;
 import java.util.Scanner;
 
+
+// Provides a basic console interface for running test functions and benchmarks from the PCQueueTestManager
 public class ProducerConsumerTestInterface {
 
     public static void main(String[] args) {
